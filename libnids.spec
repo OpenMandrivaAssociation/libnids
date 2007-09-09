@@ -1,14 +1,11 @@
-%define name	libnids
-%define version	1.21
-%define release	%mkrel 1
-
-%define major	1
-%define libname	%mklibname nids %{major}
+%define major 1
+%define libname %mklibname nids %{major}
+%define develname %mklibname nids -d
 
 Summary:	Library that provides function of Network Intrusion Detection System 
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:		libnids
+Version:	1.21
+Release:	%mkrel 2
 License:	GPL        
 Group:		Networking/Other		
 URL:		http://libnids.sourceforge.net/
@@ -18,7 +15,6 @@ Patch1:		libnids-1.19-x86-pic.diff
 BuildRequires:	libpcap-devel
 BuildRequires:	libnet1.1.2-devel
 BuildRequires:	glib2-devel >= 2.2.0
-
 BuildRequires:  automake1.7
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 
@@ -41,13 +37,14 @@ traffic, cooks received datagrams a bit (quite a bit ;)), and
 provides convenient information on them to analyzing modules of
 NIDS.
 
-%package -n	%{libname}-devel
+%package -n	%{develname}
 Summary:	Library that provides function of Network Intrusion Detection System
 Group:		Development/Other
 Requires:	%{libname} = %{version}
-Provides:	%{name}-devel = %{version}
+Provides:	%{name}-devel = %{version}-%{release}
+Obsoletes:	%{mklibname nids 1 -d}
 
-%description -n	%{libname}-devel
+%description -n	%{develname}
 Libnids is a library that provides a functionality of one of NIDS
 (Network Intrusion Detection System) components, namely
 E-component. It means that libnids code watches all local network
@@ -100,7 +97,7 @@ ln -snf libnids.so.%{major} %{buildroot}%{_libdir}/libnids.so
 %defattr(-,root,root)
 %{_libdir}/lib*.so.*
 
-%files -n %{libname}-devel
+%files -n %{develname}
 %defattr(0644,root,root,0755)
 %doc CHANGES README CREDITS MISC doc/*
 %defattr(-,root,root)
@@ -108,5 +105,3 @@ ln -snf libnids.so.%{major} %{buildroot}%{_libdir}/libnids.so
 %{_libdir}/lib*.so
 %{_includedir}/nids.h
 %{_mandir}/man3/*
-
-
