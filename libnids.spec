@@ -16,6 +16,7 @@ BuildRequires:	libpcap-devel
 BuildRequires:	libnet1.1.2-devel
 BuildRequires:	glib2-devel >= 2.2.0
 BuildRequires:  automake1.7
+BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description 
 Libnids is an implementation of an E-component of Network
