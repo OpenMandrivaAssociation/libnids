@@ -2,55 +2,55 @@
 %define libname %mklibname nids %{major}
 %define develname %mklibname nids -d
 
-Summary:	Library that provides function of Network Intrusion Detection System 
+Summary:	Library that provides functions of Network Intrusion Detection System 
 Name:		libnids
-Version:	1.21
-Release:	%mkrel 3
+Version:	1.23
+Release:	%mkrel 1
 License:	GPL        
 Group:		Networking/Other		
 URL:		http://libnids.sourceforge.net/
-Source0:	http://prdownloads.sourceforge.net/libnids/%{name}-%{version}.tar.bz2
+Source0:	http://prdownloads.sourceforge.net/libnids/%{name}-%{version}.tar.gz
+Source1:	http://prdownloads.sourceforge.net/libnids/%{name}-%{version}.tar.gz.asc
 Patch0:		libnids-1.18-libnet_config.diff
 Patch1:		libnids-1.19-x86-pic.diff
 BuildRequires:	libpcap-devel
 BuildRequires:	libnet1.1.2-devel
 BuildRequires:	glib2-devel >= 2.2.0
 BuildRequires:  automake1.7
-BuildRoot:	%{_tmppath}/%{name}-%{version}
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description 
-Libnids is an implementation of an E-component of Network
-Intrusion Detection System. It emulates the IP stack of Linux
-2.0.x. Libnids offers IP defragmentation, TCP stream assembly and
-TCP port scan detection.
+Libnids is an implementation of an E-component of Network Intrusion Detection
+System. It emulates the IP stack of Linux 2.0.x. Libnids offers IP
+defragmentation, TCP stream assembly and TCP port scan detection.
 
 %package -n	%{libname}
-Summary:	Libraries needed by %name
+Summary:	A shared Library that provides functions of Network Intrusion Detection System
 Group:		System/Libraries
 Provides:	%{name} = %{version}-%{release}
 
 %description -n	%{libname}
-Libnids is a library that provides a functionality of one of NIDS
-(Network Intrusion Detection System) components, namely
-E-component. It means that libnids code watches all local network
-traffic, cooks received datagrams a bit (quite a bit ;)), and
-provides convenient information on them to analyzing modules of
-NIDS.
+Libnids is a library that provides a functionality of one of NIDS (Network
+Intrusion Detection System) components, namely E-component. It means that
+libnids code watches all local network traffic, cooks received datagrams a bit
+(quite a bit ;)), and provides convenient information on them to analyzing
+modules of NIDS.
 
 %package -n	%{develname}
-Summary:	Library that provides function of Network Intrusion Detection System
+Summary:	Development files for %{name}
 Group:		Development/Other
 Requires:	%{libname} = %{version}
 Provides:	%{name}-devel = %{version}-%{release}
 Obsoletes:	%{mklibname nids 1 -d}
 
 %description -n	%{develname}
-Libnids is a library that provides a functionality of one of NIDS
-(Network Intrusion Detection System) components, namely
-E-component. It means that libnids code watches all local network
-traffic, cooks received datagrams a bit (quite a bit ;)), and
-provides convenient information on them to analyzing modules of
-NIDS.
+Libnids is a library that provides a functionality of one of NIDS (Network
+Intrusion Detection System) components, namely E-component. It means that
+libnids code watches all local network traffic, cooks received datagrams a bit
+(quite a bit ;)), and provides convenient information on them to analyzing
+modules of NIDS.
+
+This package contains the static library and header files for %{name}.
 
 %prep
 
@@ -74,7 +74,7 @@ export CFLAGS="%{optflags} -fPIC"
 %make shared static
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %makeinstall
 
@@ -89,7 +89,7 @@ ln -snf libnids.so.%{major} %{buildroot}%{_libdir}/libnids.so
 %postun -n %{libname} -p /sbin/ldconfig
 
 %clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %files -n %{libname}
 %defattr(0644,root,root,0755)
