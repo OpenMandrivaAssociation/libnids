@@ -84,9 +84,13 @@ mv %{buildroot}%{_libdir}/libnids.so.%{major} \
 ln -snf libnids.so.%{major}.0 %{buildroot}%{_libdir}/libnids.so.%{major}
 ln -snf libnids.so.%{major} %{buildroot}%{_libdir}/libnids.so
 
+%if %mdkversion < 200900
 %post -n %{libname} -p /sbin/ldconfig
+%endif
 
+%if %mdkversion < 200900
 %postun -n %{libname} -p /sbin/ldconfig
+%endif
 
 %clean
 rm -rf %{buildroot}
