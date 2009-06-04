@@ -5,16 +5,17 @@
 Summary:	Library that provides functions of Network Intrusion Detection System 
 Name:		libnids
 Version:	1.23
-Release:	%mkrel 3
-License:	GPL        
-Group:		Networking/Other		
+Release:	%mkrel 4
+License:	GPL
+Group:		Networking/Other
 URL:		http://libnids.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/libnids/%{name}-%{version}.tar.gz
 Source1:	http://prdownloads.sourceforge.net/libnids/%{name}-%{version}.tar.gz.asc
 Patch0:		libnids-1.18-libnet_config.diff
 Patch1:		libnids-1.19-x86-pic.diff
+Patch2:		libnids-1.23-gcc44.diff
 BuildRequires:	libpcap-devel
-BuildRequires:	libnet1.1.2-devel
+BuildRequires:	net-devel >= 1.1.3
 BuildRequires:	glib2-devel >= 2.2.0
 BuildRequires:  automake1.7
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -57,6 +58,7 @@ This package contains the static library and header files for %{name}.
 %setup -q
 %patch0 -p0
 %patch1 -p0
+%patch2 -p0
 
 # fix soname
 perl -pi -e "s|^LIBSHARED.*|LIBSHARED = libnids.so.%{major}|g" src/Makefile.in
