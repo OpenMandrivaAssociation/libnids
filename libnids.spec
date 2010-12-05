@@ -5,7 +5,7 @@
 Summary:	Library that provides functions of Network Intrusion Detection System 
 Name:		libnids
 Version:	1.24
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPL
 Group:		Networking/Other
 URL:		http://libnids.sourceforge.net/
