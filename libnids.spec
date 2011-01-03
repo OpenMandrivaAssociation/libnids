@@ -5,7 +5,7 @@
 Summary:	Library that provides functions of Network Intrusion Detection System 
 Name:		libnids
 Version:	1.24
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	GPL
 Group:		Networking/Other
 URL:		http://libnids.sourceforge.net/
@@ -16,7 +16,7 @@ Patch1:		libnids-1.19-x86-pic.diff
 BuildRequires:	libpcap-devel
 BuildRequires:	net-devel >= 1.1.3
 BuildRequires:	glib2-devel >= 2.2.0
-BuildRequires:  automake1.7
+BuildRequires:  automake
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description 
@@ -63,7 +63,7 @@ perl -pi -e "s|^LIBSHARED.*|LIBSHARED = libnids.so.%{major}|g" src/Makefile.in
 
 %build
 export WANT_AUTOCONF_2_5=1
-libtoolize --copy --force; aclocal-1.7; autoconf
+libtoolize --copy --force; aclocal; autoconf
 
 export CFLAGS="%{optflags} -fPIC"
 
