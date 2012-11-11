@@ -1,0 +1,19 @@
+--- src/checksum.c	2004-08-08 12:00:18.000000000 +0200
++++ src/checksum.c.oden	2005-01-19 00:54:25.431394083 +0100
+@@ -29,6 +29,7 @@
+ 	movl 16(%esp),%ecx	# Function arg: int len
+         movl 12(%esp),%esi	# Function arg: u_char *buff*/
+ 
++"	pushl %%ebx						\n"		
+ "	testl $2, %%esi						\n"		
+ "	jz 2f							\n"			
+ "	subl $2, %%ecx						\n"		
+@@ -84,7 +85,7 @@
+ "5:	movb (%%esi),%%cl					\n"
+ "6:	addl %%ecx,%%eax					\n"
+ "	adcl $0, %%eax						\n"
+-"7: 								\n"
++"7: 	popl %%ebx						\n"
+        : "=a"(sum), "=c"(len), "=S"(buff)
+        : "0"(sum), "1"(len), "2"(buff)
+        : "di", "dx" , "cc");
