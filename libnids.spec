@@ -8,7 +8,7 @@ Version:	1.24
 Release:	5
 License:	GPLv2+
 Group:		Networking/Other
-Url:		http://libnids.sourceforge.net/
+Url:		https://libnids.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/libnids/%{name}-%{version}.tar.gz
 Source1:	http://prdownloads.sourceforge.net/libnids/%{name}-%{version}.tar.gz.asc
 Patch0:		libnids-1.18-libnet_config.diff
